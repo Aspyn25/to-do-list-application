@@ -4,9 +4,9 @@ App_list = ["To-Do List Application",
         "2. Remove Task",
         "3. View Tasks",
         "4. Exit"]
-
+agenda_list = [] # list of tasks, initialize an empty list
 def app_function(num):
-    agenda_list = [] # list of tasks, initialize an empty list
+
     if num == 1:
         # add
         add_task = input("Enter the task: ")
@@ -16,10 +16,21 @@ def app_function(num):
 
     elif num == 2:
         # remove
-        print("remove agenda")
-    else:
+        remove_task = input("Enter the task to remove: ")
+        if remove_task in agenda_list:
+            agenda_list.remove(remove_task)
+            print(f"{remove_task} removed from agenda")
+        else:
+            print("Task no founded")
+
+    elif num == 3:
+        print(agenda_list)
+
+
+
         #view
-        print("view agenda")
+
+
 
 while True :
     # show the application list
