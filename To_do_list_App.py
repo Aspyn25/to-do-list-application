@@ -9,49 +9,59 @@ App_list = ["To-Do List Application",
 
 # list of tasks, initialize an empty list
 agenda_list = []
-#deadline = ""
-
 
 def app_function(num):
-
     if num == 1:
         # add def
-        adding()
-
+        add_task()
     elif num == 2:
         # remove
-        print("remove agenda")
+        remove_task()
     else:
         #view
-        print("view agenda")
+        view_tasks()
 
-def adding():
+def add_task():
     # adding task
-    add_task = input("Enter the task: ")
+    adding = input("Enter the task: ")
+
     # adding priority
     while True:
         priority = input("Enter the priority (high, medium, low): ")
-        if priority == 'high' or priority == 'medium' or priority == 'low':
+        if priority in ['high', 'medium', 'low']:
             break
         else:
             print("you should choose one of them (high, medium, low).")
+
     # adding deadline
     while True:
         try:
             deadline = input("Enter the deadline (YYYY-MM-DD): ")
             # date() : only pick date
             date_object = datetime.strptime(deadline, "%Y-%m-%d").date()
-            date_object = str(date_object).split("-")
             break
         except ValueError:
             print("You should follow this format using number(YYYY-MM-DD).")
 
-    agenda_list.append([add_task, priority, date_object])
-    print(f"\'{add_task}\' with priority \'{priority}\' and deadline \'{date_object[0]}-{date_object[1]}-{date_object[2]}\' has been added to the list.")
-    print(agenda_list)
+    agenda_list.append({
+        'task': adding,
+        'priority': priority,
+        'deadline': str(date_object)
+    })
+
+    print(f"\'{adding}\' with priority \'{priority}\' and deadline \'{date_object}\' has been added to the list.")
+    # print(agenda_list) for agenda_list what is inside
+
+def remove_task():
+    # you can write the code in here
+    print("remove")
+
+def view_tasks():
+    # you can write the code in here
+    print("view")
 
 
-
+# main
 while True :
     # show the application list
     for i in App_list:
@@ -60,6 +70,7 @@ while True :
         num = int(input("Enter your choice: "))
     except ValueError:
         print("you put the wrong number. you need to put the number(1 to 4).")
+        continue
 
     if num == 4:
         print("Exiting the application. Goodbye!")
