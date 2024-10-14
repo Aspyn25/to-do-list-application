@@ -67,14 +67,13 @@ def remove_task():
 
 def view_tasks():
     # you can write the code in here
-    print(f"{agenda_list}")
-    # print("view")
-    # if agenda_list:
-    #     print("tasks in the to do list")
-    #     for idx, agenda_list in enumerate(agenda_list, start=1):
-    #         print(f"{idx}. {agenda_list}")
-    # else:
-    #     print("to do list is empty")
+    print("view")
+    if agenda_list:
+        print("tasks in the to do list")
+        for idx, agenda in enumerate(agenda_list, start=1):
+            print(f" {idx} \'{agenda['task']}\' - priority \'{agenda['priority']}\' - deadline \'{agenda['deadline']}\'")
+    else:
+        print("to do list is empty")
 
 # main
 while True :
@@ -94,4 +93,3 @@ while True :
         print("you put the wrong number. you need to put the number(1 to 4).")
     else:
         app_function(num)
-
