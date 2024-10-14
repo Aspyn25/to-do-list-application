@@ -55,19 +55,27 @@ def add_task():
 
 
 def remove_task():
-    # you can write the code in here
+    print(f"current tasks\n {agenda_list}")
+
     remove_task = input("Enter the task to remove: ")
-    if remove_task in agenda_list:
-        agenda_list.remove(remove_task)
-        print(f"{remove_task} removed from agenda")
+    for key in agenda_list:
+        if  remove_task == key["task"]:
+            agenda_list.remove(key)
+        print(f"{key} removed from agenda")
     else:
         print("Task no founded")
 
 
 def view_tasks():
     # you can write the code in here
-    print("view")
-
+    print(f"{agenda_list}")
+    # print("view")
+    # if agenda_list:
+    #     print("tasks in the to do list")
+    #     for idx, agenda_list in enumerate(agenda_list, start=1):
+    #         print(f"{idx}. {agenda_list}")
+    # else:
+    #     print("to do list is empty")
 
 # main
 while True :
