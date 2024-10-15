@@ -34,6 +34,12 @@ def add_task():
     while True:
         priority = input("Enter the priority (high, medium, low): ")
         if priority in ['high', 'medium', 'low']:
+            if priority == 'high':
+                pri_num = 1
+            elif priority == 'medium':
+                pri_num = 2
+            else:
+                pri_num = 3
             break
         else:
             print("you should choose one of them (high, medium, low).")
@@ -51,7 +57,8 @@ def add_task():
     agenda_list.append({
         'task': adding,
         'priority': priority,
-        'deadline': str(date_object)
+        'deadline': str(date_object),
+        'pri_num': pri_num
     })
 
     print(f"\'{adding}\' with priority \'{priority}\' and deadline \'{date_object}\' has been added to the list.")
@@ -83,7 +90,13 @@ def view_tasks():
     print()
 
 def suggest_tasks():
-    print("Suggest Tasks")
+    print("Hello, Here are some tasks you might want to work on:")
+    if agenda_list:
+        sorted_list = sorted(agenda_list, key=lambda x: (x['deadline'], x['pri_num']))
+        for agenda in sorted_list:
+            print(f"{agenda['task']} - {agenda['priority']} - {agenda['deadline']}")
+    else:
+        print('There is no list')
     print()
 
 
