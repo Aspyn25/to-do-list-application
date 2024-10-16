@@ -5,7 +5,8 @@ App_list = ["To-Do List Application",
         "1. Add Task",
         "2. Remove Task",
         "3. View Tasks",
-        "4. Exit"]
+        "4. Suggest Tasks",
+        "5. Exit"]
 
 agenda_list = [] # list of tasks, initialize an empty list
 
@@ -21,6 +22,9 @@ def app_function(num):
     elif num == 3:
         view_tasks()
 
+    elif num == 4:
+        suggest_tasks()
+
 
 def add_task():
     # adding task
@@ -30,6 +34,12 @@ def add_task():
     while True:
         priority = input("Enter the priority (high, medium, low): ")
         if priority in ['high', 'medium', 'low']:
+            if priority == 'high':
+                pri_num = 1
+            elif priority == 'medium':
+                pri_num = 2
+            else:
+                pri_num = 3
             break
         else:
             print("you should choose one of them (high, medium, low).")
@@ -47,7 +57,8 @@ def add_task():
     agenda_list.append({
         'task': adding,
         'priority': priority,
-        'deadline': str(date_object)
+        'deadline': str(date_object),
+        'pri_num': pri_num
     })
 
     print(f"\'{adding}\' with priority \'{priority}\' and deadline \'{date_object}\' has been added to the list.")
@@ -55,26 +66,45 @@ def add_task():
 
 
 def remove_task():
+    print("For remove everything enter 'all'")
+    rm_task = input("Enter the task to remove: ")
+    task_found = False
+    if rm_task == "all":
+        agenda_list.clear()
+        print("Everything was removed")
+        task_found = True
 
-    remove_task = input("Enter the task to remove: ")
-    for key in agenda_list:
-        if  remove_task == key["task"]:
-            agenda_list.remove(key)
-            print(f"\'{remove_task}\' has been remove from the list")
-        else:
-            print("Task no founded")
-
+    else:
+        for key in agenda_list:
+            if  rm_task == key["task"]:
+                print(f"\'{rm_task}\' has been remove from the list")
+                agenda_list.remove(key)
+                task_found = True
+                break
+    if not task_found:
+        print("Task no founded")
+print()
 
 def view_tasks():
     # you can write the code in here
-    print(f"{agenda_list}")
-    # print("view")
-    # if agenda_list:
-    #     print("tasks in the to do list")
-    #     for idx, agenda_list in enumerate(agenda_list, start=1):
-    #         print(f"{idx}. {agenda_list}")
-    # else:
-    #     print("to do list is empty")
+    if agenda_list:
+        print("tasks in the to do list")
+        for idx, agenda in enumerate(agenda_list, start=1):
+            print(f" {idx} \'{agenda['task']}\' - priority \'{agenda['priority']}\' - deadline \'{agenda['deadline']}\'")
+    else:
+        print("to do list is empty")
+    print()
+
+def suggest_tasks():
+    print("Hello, Here are some tasks you might want to work on:")
+    if agenda_list:
+        sorted_list = sorted(agenda_list, key=lambda x: (x['deadline'], x['pri_num']))
+        for agenda in sorted_list:
+            print(f"{agenda['task']} - {agenda['priority']} - {agenda['deadline']}")
+    else:
+        print('There is no list')
+    print()
+
 
 # main
 while True :
@@ -87,11 +117,10 @@ while True :
         print("you put the wrong number. you need to put the number(1 to 4).")
         continue
 
-    if num == 4:
+    if num == 5:
         print("Exiting the application. Goodbye!")
         break
-    elif num > 4 or num < 1:
+    elif num > 5 or num < 1:
         print("you put the wrong number. you need to put the number(1 to 4).")
     else:
         app_function(num)
-
