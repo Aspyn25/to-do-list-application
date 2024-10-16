@@ -66,19 +66,25 @@ def add_task():
 
 
 def remove_task():
+
+    print("For remove everything enter 'all'")
     rm_task = input("Enter the task to remove: ")
     task_found = False
-    for key in agenda_list:
-        if  rm_task == key["task"]:
-            print(f"\'{rm_task}\' has been remove from the list")
-            agenda_list.remove(key)
-            task_found = True
-            break
+    if rm_task == "all":
+        agenda_list.clear()
+        print("Everything was removed")
+        task_found = True
 
+    else:
+        for key in agenda_list:
+            if  rm_task == key["task"]:
+                print(f"\'{rm_task}\' has been remove from the list")
+                agenda_list.remove(key)
+                task_found = True
+                break
     if not task_found:
         print("Task no founded")
-    print()
-
+print()
 def view_tasks():
     # you can write the code in here
     if agenda_list:
