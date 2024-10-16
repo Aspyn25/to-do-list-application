@@ -66,6 +66,7 @@ def add_task():
 
 
 def remove_task():
+
     print("For remove everything enter 'all'")
     rm_task = input("Enter the task to remove: ")
     task_found = False
@@ -84,7 +85,6 @@ def remove_task():
     if not task_found:
         print("Task no founded")
 print()
-
 def view_tasks():
     # you can write the code in here
     if agenda_list:
